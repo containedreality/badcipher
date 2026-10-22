@@ -10,7 +10,7 @@
 #define ROUND(x, y, k) (x ^= k, x += y)
 #define DROUND(x, y, k) (x -= y, x ^= k)
 
-static inline void badcipher_setup(uint16_t roundkeys[ROUNDS], uint16_t key[2])
+static void badcipher_setup(uint16_t roundkeys[ROUNDS], uint16_t key[2])
 {
 	uint16_t a = key[0];
 	uint16_t b = key[1];
@@ -22,7 +22,7 @@ static inline void badcipher_setup(uint16_t roundkeys[ROUNDS], uint16_t key[2])
 	}
 }
 
-static inline void badcipher_encrypt(uint16_t block[2], uint16_t roundkeys[ROUNDS])
+static void badcipher_encrypt(uint16_t block[2], uint16_t roundkeys[ROUNDS])
 {
 	for(int i = 0; i < ROUNDS; i++)
 	{
@@ -31,7 +31,7 @@ static inline void badcipher_encrypt(uint16_t block[2], uint16_t roundkeys[ROUND
 	}
 }
 
-static inline void badcipher_decrypt(uint16_t block[2], uint16_t roundkeys[ROUNDS])
+static void badcipher_decrypt(uint16_t block[2], uint16_t roundkeys[ROUNDS])
 {
 	for(int i = ROUNDS - 1; i >= 0; i--)
 	{
