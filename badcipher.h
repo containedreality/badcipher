@@ -40,4 +40,24 @@ static void badcipher_decrypt(uint16_t block[2], uint16_t roundkeys[ROUNDS])
 	}
 }
 
+static void badcipher_ctr(uint8_t* buf, uint32_t buflen, uint32_t iv, uint16_t* roundkeys)
+{
+	uint32_t block = iv;
+	uint32_t pos = 0;
+	for(;;)
+	{
+		badcipher_encrypt((uint16_t*)(&block), roundkeys);
+
+		for(int i = 0; i < 4; i++)
+		{
+			if (pos == buflen) return;
+
+			buf[pos] ^= ((uint8_t*)&block)[i];
+
+			pos++;
+			block++;
+		}
+	}
+}
+
 #endif
