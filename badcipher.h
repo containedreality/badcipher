@@ -12,10 +12,13 @@
 
 static inline void badcipher_setup(uint16_t roundkeys[ROUNDS], uint16_t key[2])
 {
+	uint16_t a = key[0];
+	uint16_t b = key[1];
+
 	for(int i = 0; i < ROUNDS; i++)
 	{
-		roundkeys[i] = key[0];
-		ROUND(key[0], key[1], i);
+		roundkeys[i] = a;
+		ROUND(a, b, i);
 	}
 }
 
